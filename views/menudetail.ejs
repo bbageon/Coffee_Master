@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    <h2>현재 접속하고 있는 유저는 <%= id %> 입니다</h2>
+    <form action="/basket" method="POST">
+        <p>
+            <input type = "hidden" name = "menuid" value = "<%= menu.menuid %>"/>
+
+            <button type="submit">장바구니추가</button>
+            <%= menu.menuid %>
+            <%= menu.menuname %>
+            <%= menu.menuprice %>
+            <%= menu.menuclass %>
+        </p>
+    </form>
+    <form action="/basket" method="get">
+        <button type="submit" value="장바구니 이동">장바구니 이동</button>
+    </form>
+    <form action="/menudetail/detailorder" method="post">
+        <input type = "hidden" name = "menu" value = "<%= JSON.stringify(menu) %>"/>
+        <button type="submit" value="바로구매">바로구매</button>
+        <input type="number" name="quantity" placeholder="수량 입력">
+        <p>신용카드</p>
+        <input type="checkbox"  name="creditcard" value="creditcard">
+        <p>현금</p>
+        <input type="checkbox"  name="cash" value="cash">
+    </form>
+</body>
+</html>

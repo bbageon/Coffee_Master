@@ -1,11 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// 세션 설정
+const session = require("express-session");
+const sessionStore = require("./db/session");
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login');
+const signupRouter = require('./routes/signup');
+const menuRouter = require('./routes/menu');
+const detailRouter = require('./routes/menudetail');
+const basketRouter = require('./routes/basket');
+const orderRouter = require('./routes/order');
 
 var app = express();
 
@@ -19,8 +29,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session 미들웨어
+app.use(session({
+  secret : "sessionkey",
+  resave : false,
+  saveUninitialized:true,
+  store: sessionStore
+}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
+app.use('/menu', menuRouter);
+app.use('/menudetail', detailRouter);
+app.use('/basket', basketRouter);
+app.use('/order', orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,5 +61,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="10">
+	<th>메뉴</th>
+	<th><%= id %></th>
+<% for(var i=0; i< menu.length; i++) { %>
+	<tr>
+        <form action="/menu/menudetail/<%= menu[i].menuid %>" method="post">
+            <td><%= menu[i].menuname %></td>
+            <input type="hidden" name = "menuid" value ="<%= menu[i].menuid %>"/>
+            <td><button type="submit">상세보기</a></td>
+            <!-- <td><%= menu[i].menuprice %></td>
+            <td><%= menu[i].menuclass %></td> -->
+    </form>
+	</tr>
+    <% } %>
+
+    </table>
+</body>
+</html>
