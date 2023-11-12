@@ -20,7 +20,11 @@
     </form>
 	</tr>
     <% } %>
-
-    </table>
+    <form action="/menu/search" method="post">
+        <input type="text" name="menuname" placeholder="검색할 메뉴 이름 입력">
+        <button type="submit">검색</button>
+    </form>
+    </table><br>
+    <a href="/" class="main-btn">처음화면으로 돌아가기</a>
 </body>
 </html>

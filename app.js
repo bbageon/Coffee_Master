@@ -16,6 +16,7 @@ const menuRouter = require('./routes/menu');
 const detailRouter = require('./routes/menudetail');
 const basketRouter = require('./routes/basket');
 const orderRouter = require('./routes/order');
+const adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/menu', menuRouter);
 app.use('/menudetail', detailRouter);
 app.use('/basket', basketRouter);
 app.use('/order', orderRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

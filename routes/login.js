@@ -28,6 +28,7 @@ router.post('/process', async (req, res) => {
     if(userpw === query2[0][0].userpw){
       req.session.uid = userid;
       res.redirect("/");
+      console.log("123", req.session.uid);
       console.log("로그인 완료");
     } else {
       res.redirect('/login');

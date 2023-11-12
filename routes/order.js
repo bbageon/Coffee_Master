@@ -5,15 +5,16 @@ const pool = require('../db/db');
 // 장바구니 일괄구매
 router.post('/', async (req, res) => {
     try {
-        const value = req.body.basket;
-        const value2 = [];
-        const value3 = [];
-        for (i=0; i<value.length; i++) {
-            value2.push(JSON.parse(value[i]));
-            value3.push(value2[0][i][0]);
-        }
-        console.log(value3[1]);
-
+        const {menuid, menuname, menuprice, menuclass} = req.body;
+        value3 = [];
+        for(var i = 0; i< menuid.length; i++){
+        value3.push({
+            menuid: menuid[i],
+            menuname: menuname[i],
+            menuprice: menuprice[i],
+            menuclass: menuclass[i],
+        })
+    }
         // 체크박스 체크 되었는지
         const cash = req.body.cash;
         const creditcard =  req.body.creditcard;
@@ -41,7 +42,7 @@ router.post('/', async (req, res) => {
             }
             const query22 = await pool.query("delete from menu_has_basket where basket_basket_id = ?",
                 [req.session.uid]);
-            return res.redirect('/basket');
+                return res.send(`<script type = "text/javascript" >alert("주문 완료"); location.href ="/basket";</script>`);
         }
         // 신용카드 선택시 
         else {
@@ -59,7 +60,7 @@ router.post('/', async (req, res) => {
             }
             const query22 = await pool.query("delete from menu_has_basket where basket_basket_id = ?",
             [req.session.uid]);
-            return res.redirect('/basket');
+            return res.send(`<script type = "text/javascript" >alert("주문 완료"); location.href ="/basket";</script>`);
         }
     } catch (error) {
         console.log(error);

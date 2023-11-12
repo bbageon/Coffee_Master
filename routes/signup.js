@@ -14,7 +14,7 @@ router.post('/proces', async(req, res) => {
     try {
         const query3 = await pool.query("INSERT INTO user (userid, userpw, username) VALUES (?, ?, ?);",
         [userid, userpw, username]);
-        return res.redirect('/');
+        return res.send(`<script type = "text/javascript" >alert("회원가입 완료"); location.href ="/";</script>`);
     }
     catch(error) {
         console.log(error);

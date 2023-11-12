@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
 router.post('/', async(req, res) => {
     // 현재 상세보기 한 메뉴 값
     const {menuid} = req.body;
+    console.log(menuid);
     try {
         // 현재 접속중인 유저 검색
         const query15 = await pool.query("select * from user where userid = ?",[req.session.uid]);
@@ -39,9 +40,8 @@ router.post('/', async(req, res) => {
         ]);
         // 장바구니 존재하는지 조회
         const query9 = await pool.query("select * from basket where user_userid =?",[req.session.uid]);
-        console.log("@@@",query9[0][0]);
         // 장바구니 없을때 장바구니 생성
-        if (query9[0][0].length === 0 ) {
+        if (query9[0][0] === undefined ) {
             const query8 = await pool.query("insert into basket (basket_id,user_userid) values (?,?) ",
             [query15[0][0].userid, req.session.uid]);  // 현재 userid 삽입 
         } else {

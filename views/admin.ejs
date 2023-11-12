@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="10">
+        <form action="/admin/delete" method="post">
+            <th scope="row">
+                메뉴번호
+            </th>
+            <th scope="row">
+                메뉴이름
+            </th>
+            <th scope="row">
+                가격
+            </th>
+            <th scope="row">
+                분류
+            </th>
+            <% for(var i=0; i< menu.length; i++) { %>
+            <tr>
+                <td><%= menu[i].menuid %></td>
+                <td><%= menu[i].menuname %></td>
+                <td><%= menu[i].menuprice %></td>
+                <td><%= menu[i].menuclass %></td>
+                
+            <% } %>
+            </tr>
+            <h2>메뉴삭제</h2>
+            <input type="text" name=menuid placeholder="삭제할 메뉴 아이디를 입력해주세요">
+            <button type="submit">메뉴삭제</button>
+        </form><br>
+
+        <form action="/admin/create" method="post">
+            <h2>메뉴 생성</h2>
+            <input type="text" name=menuname placeholder="메뉴 이름 입력"><br>
+            <input type="text" name=menuprice placeholder="메뉴 가격 입력"><br>
+            <input type="text" name=menuclass placeholder="메뉴 클래스를 입력"><br>
+            <button type="submit">메뉴생성</button>
+        </form>
+        <h2>현재 메뉴 항목</h2>
+    </table><br>
+    <a href="/" class="main-btn">처음화면으로 돌아가기</a>
+</body>
+</html>
