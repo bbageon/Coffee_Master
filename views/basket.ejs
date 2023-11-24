@@ -6,33 +6,41 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/order" method="post">
-        <button type="submit">주문하기</button><br>
-        <% for (let i=0; i< basket.length; i++) { %>
+    <table border="1">
         <tr>
-            <% let menu=[] %>
-            <% menu = basket[i][0] %>
-            <td><%= i+1 %>번항목 :</td>
-            <td><%= basket[i][0].menuid %></td>
-            <td><%= basket[i][0].menuname %></td>
-            <td><%= basket[i][0].menuprice %></td>
-            <td><%= basket[i][0].menuclass %></td>
-            <!-- <td> <button type="submit">메뉴 삭제</button><br></td> -->
+            <th>장바구니 항목</th>
+            <th>메뉴 아이디</th>
+            <th>메뉴 이름</th>
+            <th>메뉴 가격</th>
+            <th>메뉴 클래스</th>
+            <th>주문 수량</th>
+                <form action="/order" method="post">
+                    <button type="submit">주문하기</button><br>
+                    <% for (let i=0; i< basket.length; i++) { %>
+                    <tr>
+                        <% let menu=[] %>
+                        <% menu = basket[i][0] %>
+                        <td><%= i+1 %>번항목 :</td>
+                        <td><%= basket[i][0].menuid %></td>
+                        <td><%= basket[i][0].menuname %></td>
+                        <td><%= basket[i][0].menuprice %></td>
+                        <td><%= basket[i][0].menuclass %></td>
+                        <td><%= amount[i] %></td>
+                        <!-- <td> <button type="submit">메뉴 삭제</button><br></td> -->
+                    </tr>
+                    <input type="hidden" name="menuid" value = "<%= basket[i][0].menuid %>"/>
+                    <input type="hidden" name="menuname" value = "<%= basket[i][0].menuname %>"/>
+                    <input type="hidden" name="menuprice" value = "<%= basket[i][0].menuprice %>"/>
+                    <input type="hidden" name="menuclass" value = "<%= basket[i][0].menuclass %>"/>
+                <% } %>
+                <h2>총 가격 <%= sum %> 원 입니다.</h2>
         </tr>
-        <input type="hidden" name="menuid" value = "<%= basket[i][0].menuid %>"/>
-        <input type="hidden" name="menuname" value = "<%= basket[i][0].menuname %>"/>
-        <input type="hidden" name="menuprice" value = "<%= basket[i][0].menuprice %>"/>
-        <input type="hidden" name="menuclass" value = "<%= basket[i][0].menuclass %>"/>
-
-            <% } %>
-            
-
-
+    </table>
         <p>신용카드</p>
         <input type="checkbox"  name="creditcard" value="creditcard">
         <p>현금</p>
         <input type="checkbox"  name="cash" value="cash">
     </form>
-    <a href="/" class="main-btn">처음화면으로 돌아가기</a>
+    <br><a href="/" class="main-btn">처음화면으로 돌아가기</a>
 </body>
 </html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/ingri" method="post">
+        <h2>재료 생성</h2>
+        <input type="text" name=menuname placeholder="재료 이름 입력"><br>
+        <input type="text" name=menuprice placeholder="재료 양 입력"><br>
+        <input type="text" name=menuunit placeholder="재료 단위 입력"><br>
+        <button type="submit">재료생성</button>
+    </form>
+    <form action="/ingri/supply" method="post">
+        <h2>공급 업체 추가</h2>
+        <input type="text" name=supid placeholder="공급 업체 아이디 입력"><br>
+        <input type="text" name=supname placeholder="공급 업체 이름 입력 "><br>
+        <input type="text" name=supadd placeholder="공급 업체 주소 입력"><br>
+        <button type="submit">공급업체 생성</button>
+    </form>
+    <form action="/ingri/supplyment" method="post">
+        <h2>재료 주문</h2>
+        <input type="text" name=ingredient placeholder="주문할 재료 이름 입력"><br>
+        <input type="text" name=supid placeholder="주문할 공급 업체 아이디 입력 "><br>
+        <input type="text" name=sup_qua placeholder="주문할 양 입력"><br>
+        <button type="submit">재료주문</button>
+    </form>
+    <table border='10'>
+        <h2>현재 재료 항목</h2>
+        <tr>
+            <th scope="row">
+                재료이름
+            </th>
+            <th scope="row">    
+                재료이름
+            </th>
+            <th scope="row">
+                재료단위
+            </th>
+        </tr>
+        <% for(var i=0; i< count; i++) { %>
+            <tr>
+                <td><%= ingredient[i].ing_name %></td>
+                <td><%= ingredient[i].ing_qua %></td>
+                <td><%= ingredient[i].ing_unit %></td>
+            </tr>
+        <% } %>
+    </table>
+    <table border='10'>
+        <h2>현재 공급업체 항목</h2>
+        <tr>
+            <th scope="row">
+                공급업체번호
+            </th>
+            <th scope="row">    
+                공급업체이름
+            </th>
+            <th scope="row">
+                공급업체 주소
+            </th>
+        </tr>
+        <% for(var i=0; i< supcount; i++) { %>
+            <tr>
+                <td><%= supply[i].supid %></td>
+                <td><%= supply[i].supname %></td>
+                <td><%= supply[i].supadd %></td>
+            </tr>
+        <% } %>
+    </table>
+
+    
+
+</body>
+</html>

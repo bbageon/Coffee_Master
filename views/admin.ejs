@@ -11,7 +11,7 @@
             <th scope="row">
                 메뉴번호
             </th>
-            <th scope="row">
+            <th scope="row">    
                 메뉴이름
             </th>
             <th scope="row">
@@ -20,13 +20,13 @@
             <th scope="row">
                 분류
             </th>
+            </th>
             <% for(var i=0; i< menu.length; i++) { %>
             <tr>
                 <td><%= menu[i].menuid %></td>
                 <td><%= menu[i].menuname %></td>
                 <td><%= menu[i].menuprice %></td>
                 <td><%= menu[i].menuclass %></td>
-                
             <% } %>
             </tr>
             <h2>메뉴삭제</h2>
@@ -42,7 +42,52 @@
             <button type="submit">메뉴생성</button>
         </form>
         <h2>현재 메뉴 항목</h2>
+    </table>
+    <table border='10'>
+        <form action="/admin/update" method="post">
+            <h2>현재 재료 항목</h2>
+            <tr>
+                <th scope="row">
+                    재료이름
+                </th>
+                <th scope="row">    
+                    보유량
+                </th>
+                <th scope="row">
+                    단위
+                </th>
+            </tr>
+            <% for(var i=0; i< count; i++) { %>
+                <tr>
+                    <td><%= ingredient[i].ing_name %></td>
+                    <td><%= ingredient[i].ing_qua %></td>
+                    <td><%= ingredient[i].ing_unit %></td>
+                </tr>
+            <% } %>
+        </form>
     </table><br>
-    <a href="/" class="main-btn">처음화면으로 돌아가기</a>
+    <form action="admin/update" method="post">
+        <input type="text" name='menuid' placeholder="메뉴번호 입력">
+        <input type="text" name='ingredient' placeholder="재료이름 입력">
+        <input type="text" name='ingredient_qua' placeholder="재료양 입력">
+        <button type="submit">메뉴 재료 연결</button>
+    </form>
+    <form action="admin/recmenu" method="post">
+        <input type="text" name='recmenu' placeholder="메뉴번호 입력">
+        <button type="submit">추천메뉴 선정</button>
+    </form>
+    <form action="admin/spemenu" method="post">
+        <input type="text" name='spemenu' placeholder="메뉴번호 입력">
+        <button type="submit">대표메뉴 선정</button>
+    </form>
+    <form action="/admin/require" method="post">
+        <h2>통계 처리 요청</h2>
+        <button type="submit">11월 통계처리 요청</button>
+    </form>
+    <form action="/admin/require2" method="post">
+        <button type="submit">10월 통계처리 요청</button>
+    </form>
+    <a href="/ingri" class="main-btn">재료관리 페이지</a>
+    <br><a href="/" class="main-btn">처음화면으로 돌아가기</a>
 </body>
 </html>

@@ -29,6 +29,7 @@
     </form>
     <form action="/menudetail/detailorder" method="post">
         <input type = "hidden" name = "menu" value = "<%= JSON.stringify(menu) %>"/>
+        <input type = "number" name = "price" placeholder="사용할 적립금 입력" />
         <button type="submit" value="바로구매">바로구매</button>
         <input type="number" name="quantity" placeholder="수량 입력">
         <p>신용카드</p>

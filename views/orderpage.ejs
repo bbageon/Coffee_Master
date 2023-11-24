@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>현재 접속중인 유저 아이디: <%= user %> 번 입니다.</h2>
+    <table border="1">
+        <h2> 주문 메뉴 상세정보</h2>
+        <tr>
+            <th>메뉴번호</th>
+            <th>주문번호</th>
+            <th>주문양</th>
+            <th>메뉴개별가격</th>
+        </tr>
+        <% for(var i = 0; i< data.length; i++) { %>
+            <tr>
+                <td><%= data[i].menu_menuid %></td>
+                <td><%= data[i].order_orderid %></td>
+                <td><%= data[i].order_qua %></td>
+                <td><%= data[i].in_price %></td>
+            </tr>
+        <% } %>
+    </table>
+    <table border="1">
+        <h2> 주문내역</h2>
+        <tr>
+            <th>주문번호</th>
+            <th>주문방법</th>
+            <th>주문날짜</th>
+            <th>주문가격</th>
+            <th>적립금</th>
+        </tr>
+        <% for(var i = 0; i< orderdata.length; i++) { %>
+            <tr>
+                <td><%= orderdata[i].orderid %></td>
+                <td><%= orderdata[i].ordermethod %></td>
+                <td><%= orderdata[i].orderdate %></td>
+                <td><%= orderdata[i].order_price %></td>
+                <td><%= orderdata[i].order_point %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

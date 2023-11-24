@@ -7,10 +7,38 @@ router.get('/', async (req, res) => {
     const query4 = await pool.query('SELECT * FROM menu;');
     const id1 = req.session.uid;
     const menuname = req.body.menuname;
+    const recmenu = []
+    const spemenu = []
+    const bestmenu = []
+    const bestmenu2 = []
+    for (i=0; i<query4[0].length; i++) {
+      if (query4[0][i].spe_menu == 1){
+        spemenu.push(query4[0][i].menuname);
+      }
+      if (query4[0][i].rec_menu == "1") {
+        recmenu.push(query4[0][i].menuname);
+      };
+    }
+    const query = await pool.query("SELECT menu_menuid, sum(order_qua) FROM coffeestore.orders inner join menu_has_order on order_orderid = orderid group by menu_menuid order by sum(order_qua) desc");
+    console.log(query[0][1].menu_menuid)
+    for (y=0; y<2; y++) {
+      bestmenu.push(query[0][y].menu_menuid)
+    }
+    console.log("!!!", bestmenu[1]);
+    for (i=0; i<bestmenu.length; i++){
+      const query10 = await pool.query("select * from menu where menuid = ?",[bestmenu[i]])
+      console.log(query10[0][0])
+      bestmenu2.push(query10[0][0].menuname);
+    }
+    console.log("@@@", bestmenu2);
+   
     return res.render('menu',
     {
       menu : query4[0],
       id : id1,
+      recmenu : recmenu,
+      spemenu : spemenu,
+      bestmenu2 : bestmenu2
     });
   });
 

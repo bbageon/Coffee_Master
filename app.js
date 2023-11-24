@@ -17,7 +17,8 @@ const detailRouter = require('./routes/menudetail');
 const basketRouter = require('./routes/basket');
 const orderRouter = require('./routes/order');
 const adminRouter = require('./routes/admin');
-
+const orderpageRouter = require('./routes/orderpage')
+const ingriRouter = require('./routes/ingri');
 var app = express();
 
 // view engine setup
@@ -47,6 +48,8 @@ app.use('/menudetail', detailRouter);
 app.use('/basket', basketRouter);
 app.use('/order', orderRouter);
 app.use('/admin', adminRouter);
+app.use('/orderpage', orderpageRouter);
+app.use('/ingri', ingriRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

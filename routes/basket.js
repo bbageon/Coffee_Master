@@ -9,7 +9,10 @@ router.get('/', async (req, res) => {
         // 현재 장바구니 아이디에 해당하는 모든 메뉴 출력
         const query14 = await pool.query("select * from menu_has_basket where basket_basket_id = ?",[query13[0][0].basket_id]);
         let temp = [];
-        if(query14[0] == []){
+        let temp2 = [];
+        let sum = 0;
+        console.log("@@@", query14[0]);
+        if(query14[0].length==0){
             // 장바구니에 물건이 없을때
             return res.send(`<script type = "text/javascript" >alert("장바구니에 물건이 없습니다"); location.href ="/";</script>`);
         }
@@ -18,8 +21,16 @@ router.get('/', async (req, res) => {
             const query16 = await pool.query("select * from menu where menuid = ?",[query14[0][i].menu_menuid]);
             temp.push(query16[0]);
             // console.log("!!!", query16[0]);
+            temp2.push(query14[0][i].basket_amount);
+            sum = sum + (Number(query16[0][0].menuprice)*query14[0][i].basket_amount);
+            console.log("!!!" ,  query16[0][0]);
         }
-        return res.render('basket', {basket: temp});
+        console.log("@@@",sum);
+        return res.render('basket', {
+            basket: temp,
+            amount : temp2,
+            sum : sum
+        });
     } catch (error){
         console.log(error);
         return res.send(`<script type = "text/javascript" >alert("장바구니에 물건이 없노"); location.href ="/";</script>`);
